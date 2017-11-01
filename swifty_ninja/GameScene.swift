@@ -25,6 +25,8 @@ class GameScene: SKScene {
     
     var activeSlicePoints = [CGPoint]()
     
+    var isSwooshSoundActive = false
+    
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "sliceBackground")
         background.position = CGPoint(x: 512, y: 384)
@@ -139,5 +141,19 @@ class GameScene: SKScene {
         
         activeSliceBG.path = path.cgPath
         activeSliceFG.path = path.cgPath
+    }
+    
+    func playSwooshSound() {
+        isSwooshSoundActive = true
+        
+        let randomNumber = RandomInt(min: 1, max: 3)
+        let soundNae = "swoosh\(randomNumber).caf"
+        
+        let swooshSound = SKAction.playSoundFileNamed(soundName, waitForCompletion: true)
+        
+        run(swooshSound) {
+            [unowned self] in
+            self.isSwooshSoundActive = false
+        }
     }
 }
