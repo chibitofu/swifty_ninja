@@ -49,6 +49,10 @@ class GameScene: SKScene {
         
         activeSlicePoints.append(location)
         redrawActiveSlice()
+        
+        if !isSwooshSoundActive {
+            playSwooshSound()
+        }
     }
     
     override func touchesEnded(_ touched: Set<UITouch>, with event: UIEvent?) {
@@ -147,7 +151,7 @@ class GameScene: SKScene {
         isSwooshSoundActive = true
         
         let randomNumber = RandomInt(min: 1, max: 3)
-        let soundNae = "swoosh\(randomNumber).caf"
+        let soundName = "swoosh\(randomNumber).caf"
         
         let swooshSound = SKAction.playSoundFileNamed(soundName, waitForCompletion: true)
         
